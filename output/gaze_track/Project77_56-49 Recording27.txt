@@ -1,0 +1,5 @@
+Option->Diagram,0.5911016949152542
+Diagram->Statement,0.03389830508474576
+Statement->Diagram,0.1419491525423729
+Diagram->Statement,0.16101694915254236
+Statement->Diagram,0.07203389830508475

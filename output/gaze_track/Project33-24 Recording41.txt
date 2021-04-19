@@ -1,0 +1,2 @@
+Diagram->Statement,0.7282608695652174
+Statement->Diagram,0.2717391304347826

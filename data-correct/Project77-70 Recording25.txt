@@ -1,0 +1,17 @@
+Diagram,3,24
+OptionD,1,8
+Statement,2,16
+Diagram,1,8
+OptionB,2,34
+OptionC,2,25
+OptionA,1,8
+OptionD,1,8
+OptionC,1,8
+OptionB,4,41
+OptionC,2,25
+OptionB,3,24
+OptionC,1,8
+OptionA,3,33
+OptionB,1,8
+OptionC,2,16
+

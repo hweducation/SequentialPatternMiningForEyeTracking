@@ -1,0 +1,8 @@
+combox,0,1107
+diagram,0,689
+optionA,0,1489
+optionC,0,896
+timer,0,159
+optionC,0,598
+statement,0,959
+optionD,0,697

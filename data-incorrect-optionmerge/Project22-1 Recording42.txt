@@ -1,0 +1,6 @@
+Option,5,49
+Statement,2,34
+Option,7,65
+Diagram,2,25
+Option,15,129
+

@@ -1,0 +1,7 @@
+OptionB,2,34
+OptionC,5,49
+OptionA,1,8
+Statement,2,26
+Diagram,1,8
+Statement,2,16
+

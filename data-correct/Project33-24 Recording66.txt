@@ -1,0 +1,8 @@
+Statement,2,16
+OptionA,4,32
+OptionB,3,24
+Statement,5,40
+OptionA,2,16
+OptionB,1,8
+Statement,4,32
+

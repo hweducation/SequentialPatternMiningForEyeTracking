@@ -1,0 +1,7 @@
+Statement,0.25
+Diagram,0.0625
+Statement,0.0625
+Diagram,0.125
+Statement,0.0625
+Diagram,0.0625
+Statement,0.375

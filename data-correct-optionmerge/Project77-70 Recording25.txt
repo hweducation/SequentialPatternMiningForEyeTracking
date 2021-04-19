@@ -1,0 +1,6 @@
+Diagram,3,24
+Option,1,8
+Statement,2,16
+Diagram,1,8
+Option,24,246
+

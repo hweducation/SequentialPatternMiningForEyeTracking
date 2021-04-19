@@ -1,0 +1,8 @@
+Statement,4,32
+Diagram,1,8
+Statement,1,8
+Diagram,2,16
+Statement,1,8
+Diagram,1,8
+Statement,6,48
+
