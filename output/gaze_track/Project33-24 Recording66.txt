@@ -1,4 +1,6 @@
 Statement->Option,0.25
 Option->Statement,0.3333333333333333
 Statement->Option,0.2222222222222222
-Option->Statement,0.19444444444444445
+Statement->Option->Statement,0.34146341463414637
+Option->Statement->Option,0.36585365853658536
+Statement->Option->Statement->Option,0.4722222222222222

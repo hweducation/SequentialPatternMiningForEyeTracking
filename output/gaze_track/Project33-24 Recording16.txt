@@ -3,4 +3,10 @@ Diagram->Statement,0.09090909090909091
 Statement->Diagram,0.13636363636363635
 Diagram->Statement,0.13636363636363635
 Statement->Diagram,0.09090909090909091
-Diagram->Statement,0.3181818181818182
+Statement->Diagram->Statement,0.23076923076923078
+Diagram->Statement->Diagram,0.15384615384615385
+Statement->Diagram->Statement,0.15384615384615385
+Diagram->Statement->Diagram,0.15384615384615385
+Statement->Diagram->Statement->Diagram,0.2857142857142857
+Diagram->Statement->Diagram->Statement,0.17857142857142858
+Statement->Diagram->Statement->Diagram,0.17857142857142858

@@ -31,9 +31,13 @@ if __name__ == "__main__":
             gazetrack_prob_data_muti = []
             for i in range(2, 5):#2\3\4
                 gazetrack_prob_data_muti.append(crateGazeTrackProbData_new(raw_data_dict, i))
-            gazetrack_prob_data = gazetrack_prob_data_muti[0]
+            gazetrack_prob_data = {}
+            index = 0
             for i in range(len(gazetrack_prob_data_muti)):
-                gazetrack_prob_data
+                for j in range(len(gazetrack_prob_data_muti[i])):
+                    gazetrack_prob_data[index] = gazetrack_prob_data_muti[i][j]
+                    index += 1
+
 
 
             GAZE_TRACK_DICT[user_name] = gazetrack_prob_data; print(gazetrack_prob_data)
