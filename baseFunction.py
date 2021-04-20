@@ -46,13 +46,13 @@ def crateGazeTrackProbData(raw_data):
     get_duration = lambda item: item[-1]
     total_duration = sum([get_duration(item) for item in list(raw_data.values())])
     key_list = sorted(list(raw_data.keys()))
-    print("raw_data")
-    print(raw_data)
-    print("key_list")
-    print(key_list)
+    #print("raw_data")
+    #print(raw_data)
+    #print("key_list")
+    #print(key_list)
     GazeTrack_Prob_Data = {key:["%s->%s"%(raw_data[key_list[i-1]][0], raw_data[key][0]), (raw_data[key_list[i-1]][1] + raw_data[key][1]) / (total_duration*2-raw_data[key_list[0]][1]-raw_data[key_list[-1]][1])] for i, key in enumerate(key_list) if i > 0}
-    print("GazeTrack_Prob_Data")
-    print(GazeTrack_Prob_Data)
+    #print("GazeTrack_Prob_Data")
+    #print(GazeTrack_Prob_Data)
     return GazeTrack_Prob_Data
 
 
@@ -72,15 +72,15 @@ def crateGazeTrackProbData_new(raw_data, my_length):
         muti_total_time -= temp
         i += 1
 
-    print("muti_total_time")
-    print(muti_total_time)
-    GazeTrack_Prob_Data={}
+    #print("muti_total_time")
+    #print(muti_total_time)
+    GazeTrack_Prob_Data = {}
 
     i = 0
-    while i < len(key_list)-my_length:
+    while i < len(key_list) - my_length + 1:
         j = 0
         name = ""
-        while j < my_length-1:
+        while j < my_length - 1:
             name += raw_data[i+j][0]+"->"
             j += 1
         name += raw_data[key_list[i + my_length - 1]][0]
@@ -88,12 +88,12 @@ def crateGazeTrackProbData_new(raw_data, my_length):
         p = 0
         for k in range(my_length):
             p += raw_data[key_list[i + k]][1]
-        p = p/muti_total_time
+        p = p / muti_total_time
         GazeTrack_Prob_Data[i] = [name, p]
         i += 1
 
-    print("GazeTrack_Prob_Data")
-    print(GazeTrack_Prob_Data)
+    #print("GazeTrack_Prob_Data")
+    #print(GazeTrack_Prob_Data)
     return GazeTrack_Prob_Data
 
 
@@ -146,6 +146,12 @@ def outputPatternToXlwt_mutiSheet(book, Pattern_Summary_Dict):
         worksheet.cell(i + 1, 1, key)
         worksheet.cell(i + 1, 2, Pattern_Summary_Dict["total"][key].length)
         worksheet.cell(i + 1, 3, Pattern_Summary_Dict["total"][key].support)
+        k = 4
+        if len(Pattern_Summary_Dict["total"][key].username_support_list) != 0:
+            for u_s in Pattern_Summary_Dict["total"][key].username_support_list:
+                worksheet.cell(i + 1, k, u_s[0])
+                worksheet.cell(i + 1, k + 1, u_s[1])
+                k += 2
         i = i + 1
 
     """ pattern_name, length, support """

@@ -1,2 +1,3 @@
-ROOT_PATH : "data-correct-optionmerge/"
+CORRECT_ROOT_PATH : "data-correct/"
+INCORRECT_ROOT_PATH : "data-incorrect/"
 OUTPUT_PATH : "output/"

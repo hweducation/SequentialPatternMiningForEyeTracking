@@ -5,6 +5,9 @@ class Classical_Sequential_Pattern:
         self.pattern_name = pattern_name
         self.length = length
         self.support = support
+        self.username_support_list = []
+    def appendSubsupport(self, username_support_tuple):
+        self.username_support_list.append(username_support_tuple)
 
 class Prefix_Item:
     def __init__(self, prefix_name, prob, end_pos):
@@ -123,7 +126,32 @@ def getTotalSupp(Pattern_Summary_Dict, user_ids = [], user_type = "total"):
                 total_pattern[pattern] = []
                 Pattern_Summary_Dict[user_type][pattern] = Classical_Sequential_Pattern(pattern_name=Pattern_Summary_Dict[user_id][pattern].pattern_name, length=Pattern_Summary_Dict[user_id][pattern].length, support=0.0)
             total_pattern[pattern].append(Pattern_Summary_Dict[user_id][pattern].support)
+    pattern_support = {}
     for key in total_pattern.keys():
         support = sum(total_pattern[key])
+        pattern_support[key] = support
         # support = sum(total_pattern[key]) / len(user_ids)
         Pattern_Summary_Dict[user_type][key].support = support
+    pattern_support_order = sorted(pattern_support.items(), key=lambda x: x[1], reverse=True)#这是一个列表，列表内容是元组
+
+    '''   
+    #这一段并不能对字典排序
+    for pattern_support_tuple in pattern_support_order:
+        key = pattern_support_tuple[0]
+        support = pattern_support_tuple[-1]
+        Pattern_Summary_Dict["total"][key].support = support
+    '''
+
+    top_pattern_support_s = pattern_support_order[0:20]
+    #top15的模式来自于哪几个文件
+    for top_pattern_support in top_pattern_support_s:
+        pattern = top_pattern_support[0]
+        sum_support = top_pattern_support[1]
+        classical_sequential_pattern = Pattern_Summary_Dict["total"][top_pattern_support[0]]
+        for user_id in dict(Pattern_Summary_Dict).keys():
+            if user_id != "total":
+                for pattern in dict(Pattern_Summary_Dict[user_id]).keys():
+                    if pattern == top_pattern_support[0]:
+                        user_supportPercent = (user_id, Pattern_Summary_Dict[user_id][pattern].support / sum_support)
+                        classical_sequential_pattern.appendSubsupport(user_supportPercent)
+        Pattern_Summary_Dict["total"][top_pattern_support[0]] = classical_sequential_pattern

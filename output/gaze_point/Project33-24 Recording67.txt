@@ -1,4 +1,4 @@
-Option,0.4
+OptionA,0.4
 Statement,0.2
 Diagram,0.2
 Statement,0.2

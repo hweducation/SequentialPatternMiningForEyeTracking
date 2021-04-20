@@ -1,3 +1,12 @@
-Option->Statement,0.6685714285714286
-Statement->Diagram,0.19428571428571428
-Option->Statement->Diagram,0.7142857142857143
+OptionB->OptionC,0.3577586206896552
+OptionC->OptionA,0.24568965517241378
+OptionA->Statement,0.14655172413793102
+Statement->Diagram,0.14655172413793102
+Diagram->Statement,0.10344827586206896
+OptionB->OptionC->OptionA,0.34210526315789475
+OptionC->OptionA->Statement,0.31203007518796994
+OptionA->Statement->Diagram,0.15789473684210525
+Statement->Diagram->Statement,0.18796992481203006
+OptionB->OptionC->OptionA->Statement,0.4398496240601504
+OptionC->OptionA->Statement->Diagram,0.34210526315789475
+OptionA->Statement->Diagram->Statement,0.21804511278195488
