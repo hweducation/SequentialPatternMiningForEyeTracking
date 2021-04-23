@@ -1,3 +1,1 @@
-OptionA->OptionC,0.7735849056603774
-OptionC->Diagram,0.22641509433962265
-OptionA->OptionC->Diagram,1.0
+Option->Diagram,1.0

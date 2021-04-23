@@ -1,6 +1,6 @@
-OptionA->Statement,0.42857142857142855
+Option->Statement,0.42857142857142855
 Statement->Diagram,0.2857142857142857
 Diagram->Statement,0.2857142857142857
-OptionA->Statement->Diagram,0.5714285714285714
+Option->Statement->Diagram,0.5714285714285714
 Statement->Diagram->Statement,0.42857142857142855
-OptionA->Statement->Diagram->Statement,1.0
+Option->Statement->Diagram->Statement,1.0

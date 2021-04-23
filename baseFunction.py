@@ -77,7 +77,7 @@ def crateGazeTrackProbData_new(raw_data, my_length):
     GazeTrack_Prob_Data = {}
 
     i = 0
-    while i < len(key_list) - my_length + 1:
+    while i < len(key_list) - my_length + 1:# 5 - 3 + 1 = 3
         j = 0
         name = ""
         while j < my_length - 1:
@@ -134,6 +134,46 @@ def crateXlsxFile_mutiSheet(dir_path):
     workbook.remove(ws)
     return workbook
 
+def outputRankToXlwt(book, incorrect_rank_correct_rank, sheet_name, threshold):
+    worksheet = book.create_sheet(sheet_name)
+    worksheet.cell(1, 1, "pattern_name")
+    if 'in' in sheet_name:
+        worksheet.cell(1, 2, "incorrect_rank")
+        worksheet.cell(1, 3, "correct_rank")
+    else:
+        worksheet.cell(1, 2, "correct_rank")
+        worksheet.cell(1, 3, "incorrect_rank")
+    worksheet.cell(1, 4, "difference_value")
+    worksheet.cell(1, 5, ">threshold="+str(threshold))
+    index = 2
+    for tuple in incorrect_rank_correct_rank:
+        if len(tuple) == 4:
+            worksheet.cell(index, 1, tuple[0])
+            worksheet.cell(index, 2, tuple[1])
+            worksheet.cell(index, 3, tuple[2])
+            worksheet.cell(index, 4, tuple[3])
+        elif len(tuple) == 5:
+            worksheet.cell(index, 1, tuple[0])
+            worksheet.cell(index, 2, tuple[1])
+            worksheet.cell(index, 3, tuple[2])
+            worksheet.cell(index, 4, tuple[3])
+            worksheet.cell(index, 5, tuple[4])
+        index += 1
+    return
+def outputAllinTopNToXlwt(book, all_in_topN):
+    worksheet = book.create_sheet('all_in_topN')
+    worksheet.cell(1, 1, "pattern_name")
+    worksheet.cell(1, 2, "incorrect_rank")
+    worksheet.cell(1, 3, "correct_rank")
+    worksheet.cell(1, 4, "difference_value")
+    index = 2
+    for tuple in all_in_topN:
+        worksheet.cell(index, 1, tuple[0])
+        worksheet.cell(index, 2, tuple[1])
+        worksheet.cell(index, 3, tuple[2])
+        worksheet.cell(index, 4, tuple[3])
+        index += 1
+    return
 
 def outputPatternToXlwt_mutiSheet(book, Pattern_Summary_Dict):
     from miningFuntion import Classical_Sequential_Pattern

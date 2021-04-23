@@ -6,6 +6,7 @@ class Classical_Sequential_Pattern:
         self.length = length
         self.support = support
         self.username_support_list = []
+        self.rank = 0
     def appendSubsupport(self, username_support_tuple):
         self.username_support_list.append(username_support_tuple)
 
@@ -119,28 +120,34 @@ def PrefixSpan_for_Sequential_Pattern_new(alpha, Sess_after_alpha, Record_alpha,
 def getTotalSupp(Pattern_Summary_Dict, user_ids = [], user_type = "total"):
     total_pattern = {}
     Pattern_Summary_Dict[user_type] = {}
+    #临时的存储total序列模式的字典
+    temp_Summary_Dict = {}
+    temp_Summary_Dict[user_type] = {}
     #for user_id in user_ids:
     for user_id in dict(Pattern_Summary_Dict).keys():
         for pattern in dict(Pattern_Summary_Dict[user_id]).keys():
             if pattern not in total_pattern.keys():
                 total_pattern[pattern] = []
-                Pattern_Summary_Dict[user_type][pattern] = Classical_Sequential_Pattern(pattern_name=Pattern_Summary_Dict[user_id][pattern].pattern_name, length=Pattern_Summary_Dict[user_id][pattern].length, support=0.0)
+                temp_Summary_Dict[user_type][pattern] = Classical_Sequential_Pattern(pattern_name=Pattern_Summary_Dict[user_id][pattern].pattern_name, length=Pattern_Summary_Dict[user_id][pattern].length, support=0.0)
             total_pattern[pattern].append(Pattern_Summary_Dict[user_id][pattern].support)
     pattern_support = {}
     for key in total_pattern.keys():
         support = sum(total_pattern[key])
         pattern_support[key] = support
         # support = sum(total_pattern[key]) / len(user_ids)
-        Pattern_Summary_Dict[user_type][key].support = support
+        temp_Summary_Dict[user_type][key].support = support
     pattern_support_order = sorted(pattern_support.items(), key=lambda x: x[1], reverse=True)#这是一个列表，列表内容是元组
 
-    '''   
-    #这一段并不能对字典排序
+
+    #将排好序的total放入字典中
+    rank = 0
     for pattern_support_tuple in pattern_support_order:
         key = pattern_support_tuple[0]
         support = pattern_support_tuple[-1]
-        Pattern_Summary_Dict["total"][key].support = support
-    '''
+        rank += 1
+        Pattern_Summary_Dict[user_type][key] = Classical_Sequential_Pattern(key, length=temp_Summary_Dict[user_type][key].length, support=support)
+        Pattern_Summary_Dict[user_type][key].rank = rank
+
 
     top_pattern_support_s = pattern_support_order[0:20]
     #top15的模式来自于哪几个文件
