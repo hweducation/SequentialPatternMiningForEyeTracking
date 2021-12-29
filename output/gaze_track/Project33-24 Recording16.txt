@@ -9,7 +9,3 @@ Diagram->Statement->Diagram,0.15384615384615385
 Statement->Diagram->Statement,0.15384615384615385
 Diagram->Statement->Diagram,0.15384615384615385
 Statement->Diagram->Statement,0.3076923076923077
-Statement->Diagram->Statement->Diagram,0.2857142857142857
-Diagram->Statement->Diagram->Statement,0.17857142857142858
-Statement->Diagram->Statement->Diagram,0.17857142857142858
-Diagram->Statement->Diagram->Statement,0.35714285714285715

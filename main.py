@@ -56,8 +56,8 @@ if __name__ == "__main__":
 
                 """ 挖掘算法 """
                 Pattern_Summary_Dict_point[user_name], Pattern_Summary_Dict_track[user_name], Pattern_Summary_Dict_track_new[user_name] = {}, {}, {}
-                #PrefixSpan_for_Sequential_Pattern([], gaze_prob_data, [], Pattern_Summary_Dict_point[user_name], 2, 5)
-                PrefixSpan_for_Sequential_Pattern([], gazetrack_prob_data, [], Pattern_Summary_Dict_track[user_name], 2, 3)
+                PrefixSpan_for_Sequential_Pattern([], gaze_prob_data, [], Pattern_Summary_Dict_point[user_name], 2, 5)
+                #PrefixSpan_for_Sequential_Pattern([], gazetrack_prob_data, [], Pattern_Summary_Dict_track[user_name], 2, 3)
                 '''
                 for i in range(2, 6):
                     gazetrack_prob_data_new = crateGazeTrackProbData_new(raw_data_dict, i)#新加的

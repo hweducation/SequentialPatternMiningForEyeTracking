@@ -22,7 +22,7 @@ def findCategory(alpha, Sess_after_alpha):
     get_category = lambda item: item[0]
     categories = list(map(get_category, Sess_after_alpha.values()))
     # print(set(categories) - set(alpha))
-    return set(categories) - set(alpha)
+    return set(categories) - set(alpha) #不重复元素序列，如果需要重复元素序列，删掉set(alpha)
 
 """ 找到 事件cate 在数据中的实例 """
 def findInstanceList(cate, Sess_after_alpha):

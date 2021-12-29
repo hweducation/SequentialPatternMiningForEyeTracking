@@ -23,14 +23,3 @@ Option->Statement->Option,0.013735523835173714
 Statement->Option->Statement,0.013735523835173714
 Option->Statement->Option,0.3584702396983571
 Statement->Option->Statement,0.37220576353353085
-Option->Statement->Option->Statement,0.11307692307692307
-Statement->Option->Statement->Option,0.025897435897435896
-Option->Statement->Option->Statement,0.025897435897435896
-Statement->Option->Statement->Option,0.03051282051282051
-Option->Statement->Option->Statement,0.021794871794871794
-Statement->Option->Statement->Option,0.021794871794871794
-Option->Statement->Option->Statement,0.021794871794871794
-Statement->Option->Statement->Option,0.017435897435897435
-Option->Statement->Option->Statement,0.017435897435897435
-Statement->Option->Statement->Option,0.34564102564102567
-Option->Statement->Option->Statement,0.3587179487179487

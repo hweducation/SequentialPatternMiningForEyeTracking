@@ -7,6 +7,3 @@ Option->Diagram->Statement,0.5324675324675324
 Diagram->Statement->Diagram,0.1391465677179963
 Statement->Diagram->Statement,0.15584415584415584
 Diagram->Statement->Diagram,0.1725417439703154
-Option->Diagram->Statement->Diagram,0.6419294990723562
-Diagram->Statement->Diagram->Statement,0.17068645640074212
-Statement->Diagram->Statement->Diagram,0.18738404452690166

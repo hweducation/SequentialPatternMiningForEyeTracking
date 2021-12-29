@@ -3,4 +3,3 @@ Statement->Diagram,0.19428571428571428
 Diagram->Statement,0.13714285714285715
 Option->Statement->Diagram,0.7142857142857143
 Statement->Diagram->Statement,0.2857142857142857
-Option->Statement->Diagram->Statement,1.0

@@ -21,13 +21,3 @@ Statement->Diagram->Statement,0.04030313468825353
 Diagram->Statement->Diagram,0.03754736479503962
 Statement->Diagram->Statement,0.23837409576300378
 Diagram->Statement->Option,0.3751291767137444
-Diagram->Statement->Diagram->Statement,0.05927755480086446
-Statement->Diagram->Statement->Time,0.057116393948749615
-Diagram->Statement->Time->Statement,0.04970669959864155
-Statement->Time->Statement->Option,0.06761346094473603
-Time->Statement->Option->Statement,0.03859215807347947
-Statement->Option->Statement->Diagram,0.04878048780487805
-Option->Statement->Diagram->Statement,0.05927755480086446
-Statement->Diagram->Statement->Diagram,0.041062056190182154
-Diagram->Statement->Diagram->Statement,0.22661315220747144
-Statement->Diagram->Statement->Option,0.35196048163013277
