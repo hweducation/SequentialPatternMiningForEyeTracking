@@ -1,7 +1,8 @@
 import os
 import xlwt
 import openpyxl
-
+component_size = 6
+AOI_name_list = ["diagram", "optionA", "optionB", "optionC", "optionD", "statement", "time"]
 """ 读取原始数据： eyeTrack_dict以字典的格式储存， eyeTrack_dict[顺序编号] = list([可视化区域, 持续时间]) """
 def loadEyeTrackerData(file_path):
     print("begin reading eye tracker data of ", file_path)
@@ -16,6 +17,25 @@ def loadEyeTrackerData(file_path):
                 eyeTrack_dict[i] = list([category, duration])
     return eyeTrack_dict
 
+""" 读取原始数据： eyeTrack_dict以字典的格式储存， eyeTrack_dict[顺序编号] = [(AOI, 概率]) ,(AOI，概率),...] 元组的列表"""
+def loadEyeTrackerDataNew(file_path):
+    print("begin reading eye tracker data of ", file_path)
+    eyeTrack_dict = {}
+    with open(file_path, "r", encoding="utf8", errors="ignore") as file:
+        for i, line in enumerate(file.readlines()):
+            split = line.strip("\n").split(",")
+            if len(split) != component_size:
+                print("This %d line - %s - is in the wrong format"%(i, line.strip("\n")))
+            else:
+                AOI_p = []
+                index = 0
+                while index != component_size:
+                    temp_tuple =(AOI_name_list[index], split[index])
+                    AOI_p.append(temp_tuple)
+                    index += 1
+                eyeTrack_dict[i] = AOI_p
+
+    return eyeTrack_dict
 
 def outputProbData(dir_path, file_name, data_dict):
     dir_path = str(dir_path)
@@ -28,7 +48,7 @@ def outputProbData(dir_path, file_name, data_dict):
 
 
 
-""" 两种数据构造方式：
+""" 三种数据构造方式：
  1. 将“注视”信息按照 时间/总长 的方式转变成概率数据；
  2. 将“注视转移”信息按照 注视A/注视B 的方式转变成概率数据。
  """
@@ -55,6 +75,10 @@ def crateGazeTrackProbData(raw_data):
     #print(GazeTrack_Prob_Data)
     return GazeTrack_Prob_Data
 
+# """  3. 输入的就是概率数据，只需要把他转变为字典 ...不用了"""
+# def crateGazeProbDataNew(raw_data):
+#     Gaze_Prob_Data = {id: [raw_data[id][0], raw_data[id][-1]/total_duration] for id in raw_data.keys()}
+#     return Gaze_Prob_Data
 
 """  3.  长度可变的  将“注视转移”信息按照 注视A/注视B 的方式转变成概率数据。 """
 def crateGazeTrackProbData_new(raw_data, my_length):

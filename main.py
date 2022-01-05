@@ -1,7 +1,7 @@
 import os, json, yaml
 #from baseFunction import *
 #from baseFunction import loadEyeTrackerData, outputProbData, crateXlsFile, outputPatternToXlwt
-from baseFunction import loadEyeTrackerData, outputProbData, outputPatternToXlwt_mutiSheet, outputRankToXlwt, outputAllinTopNToXlwt, crateXlsxFile_mutiSheet
+from baseFunction import loadEyeTrackerDataNew, loadEyeTrackerData, outputProbData, outputPatternToXlwt_mutiSheet, outputRankToXlwt, outputAllinTopNToXlwt, crateXlsxFile_mutiSheet
 from baseFunction import crateGazeProbData, crateGazeTrackProbData, crateGazeTrackProbData_new
 
 from miningFuntion import PrefixSpan_for_Sequential_Pattern, PrefixSpan_for_Sequential_Pattern_new, Classical_Sequential_Pattern, getTotalSupp
@@ -29,33 +29,36 @@ if __name__ == "__main__":
             Pattern_Summary_Dict_point, Pattern_Summary_Dict_track, Pattern_Summary_Dict_track_new = {}, {}, {}
             for file_name in os.listdir(root_path):
                 file_path = root_path + file_name
-                raw_data_dict = loadEyeTrackerData(file_path)
+                # raw_data_dict = loadEyeTrackerData(file_path)
+                raw_data_dict = loadEyeTrackerDataNew(file_path)
                 user_name = str(file_name.split(".txt")[0])
 
-                gaze_prob_data = crateGazeProbData(raw_data_dict)
-                GAZE_POINT_DICT[user_name] = gaze_prob_data; print(gaze_prob_data)
-                #gazetrack_prob_data = crateGazeTrackProbData(raw_data_dict)
-                gazetrack_prob_data_muti = []
-                for i in range(2, 4):#2\3\(4)左闭右开
-                    gazetrack_prob_data_muti.append(crateGazeTrackProbData_new(raw_data_dict, i))
-                gazetrack_prob_data = {}
-                index = 0
-                #合并不同长度的
-                for i in range(len(gazetrack_prob_data_muti)):
-                    for j in range(len(gazetrack_prob_data_muti[i])):
-                        gazetrack_prob_data[index] = gazetrack_prob_data_muti[i][j]
-                        index += 1
-
-                GAZE_TRACK_DICT[user_name] = gazetrack_prob_data; print(gazetrack_prob_data)
-
-                """ 中间结果保存至本地 """
-                output_dir_path_1 = OUTPUT_PATH + "gaze_point/"
-                outputProbData(output_dir_path_1, file_name, gaze_prob_data)
-                output_dir_path_2 = OUTPUT_PATH + "gaze_track/"
-                outputProbData(output_dir_path_2, file_name, gazetrack_prob_data)
+                gaze_prob_data = raw_data_dict
+                # gaze_prob_data = crateGazeProbData(raw_data_dict)
+                # GAZE_POINT_DICT[user_name] = gaze_prob_data; print(gaze_prob_data)
+                # #gazetrack_prob_data = crateGazeTrackProbData(raw_data_dict)
+                # gazetrack_prob_data_muti = []
+                # for i in range(2, 4):#2\3\(4)左闭右开
+                #     gazetrack_prob_data_muti.append(crateGazeTrackProbData_new(raw_data_dict, i))
+                # gazetrack_prob_data = {}
+                # index = 0
+                # #合并不同长度的
+                # for i in range(len(gazetrack_prob_data_muti)):
+                #     for j in range(len(gazetrack_prob_data_muti[i])):
+                #         gazetrack_prob_data[index] = gazetrack_prob_data_muti[i][j]
+                #         index += 1
+                #
+                # GAZE_TRACK_DICT[user_name] = gazetrack_prob_data; print(gazetrack_prob_data)
+                #
+                # """ 中间结果保存至本地 """
+                # output_dir_path_1 = OUTPUT_PATH + "gaze_point/"
+                # outputProbData(output_dir_path_1, file_name, gaze_prob_data)
+                # output_dir_path_2 = OUTPUT_PATH + "gaze_track/"
+                # outputProbData(output_dir_path_2, file_name, gazetrack_prob_data)
 
                 """ 挖掘算法 """
                 Pattern_Summary_Dict_point[user_name], Pattern_Summary_Dict_track[user_name], Pattern_Summary_Dict_track_new[user_name] = {}, {}, {}
+
                 PrefixSpan_for_Sequential_Pattern([], gaze_prob_data, [], Pattern_Summary_Dict_point[user_name], 2, 5)
                 #PrefixSpan_for_Sequential_Pattern([], gazetrack_prob_data, [], Pattern_Summary_Dict_track[user_name], 2, 3)
                 '''

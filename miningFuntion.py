@@ -1,4 +1,5 @@
 import math
+from baseFunction import AOI_name_list
 
 class Classical_Sequential_Pattern:
     def __init__(self, pattern_name, length, support):
@@ -42,12 +43,15 @@ def findRecord(prefix_record, position):
 
 
 def PrefixSpan_for_Sequential_Pattern(alpha, Sess_after_alpha, Record_alpha, Pattern_Summary_Dict, min_len, max_len):
-    next_categories = findCategory(alpha, Sess_after_alpha)
+    # next_categories = findCategory(alpha, Sess_after_alpha)
+    next_categories = AOI_name_list
     for cate in next_categories:
         ''' beta is the new pattern '''
         beta = alpha.copy(); beta.append(str(cate)); beta_len = len(beta)
         ''' get instance action of cate '''
         InstanceList = findInstanceList(cate, Sess_after_alpha)
+        if len(InstanceList) == 0:
+            continue
         ''' S_beta is the suffix set; R_beta is the ; Supp_beta is the ; '''
         Sess_after_beta, Supp_beta, Record_beta = {}, {}, []
 
@@ -73,7 +77,7 @@ def PrefixSpan_for_Sequential_Pattern(alpha, Sess_after_alpha, Record_alpha, Pat
 
         """ 基于模式增长思想的递归算法 """
         if P > 0.0 and beta_len < max_len and InstanceList[0][0] + 1 < len(Sess_after_alpha):
-            Sess_after_beta = dict(filter(lambda item: item[0]>InstanceList[0][0], Sess_after_alpha.items()))
+            Sess_after_beta = dict(filter(lambda item: item[0] > InstanceList[0][0], Sess_after_alpha.items()))
             # {key:Sess_after_alpha[key] for key in Sess_after_alpha.keys() if key > InstanceList[0][0]}
             PrefixSpan_for_Sequential_Pattern(beta, Sess_after_beta, Record_beta, Pattern_Summary_Dict, min_len, max_len)
 

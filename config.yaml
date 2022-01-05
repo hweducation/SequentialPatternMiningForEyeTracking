@@ -1,3 +1,3 @@
-CORRECT_ROOT_PATH : "data-correct-optionmerge/"
-INCORRECT_ROOT_PATH : "data-incorrect-optionmerge/"
+CORRECT_ROOT_PATH : "GMMdata/hou_shu_01/data-high/"
+INCORRECT_ROOT_PATH : "GMMdata/hou_shu_01/data-low/"
 OUTPUT_PATH : "output/"
