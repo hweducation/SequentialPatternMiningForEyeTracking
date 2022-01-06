@@ -33,6 +33,22 @@ def findInstanceList(cate, Sess_after_alpha):
     # print(InstanceList)
     return InstanceList
 
+def findInstanceList_muti(cate, Sess_after_alpha):
+    InstanceList = []
+    # [[key, Sess_after_alpha[key][-1]] for key in Sess_after_alpha.keys() if cate in Sess_after_alpha[key][0][0]]
+    for key in Sess_after_alpha.keys():
+        a_instance = []
+        for tuple_list in Sess_after_alpha[key]:
+            if cate in tuple_list[0]:
+                a_instance.append(key)
+                a_instance.append(tuple_list[1])
+        if len(a_instance) > 0:
+            InstanceList.append(a_instance)
+    if len(InstanceList):
+        InstanceList = sorted(InstanceList, key=lambda item: item[0])
+    # print(InstanceList)
+    return InstanceList
+
 """ 根据 事件cate的实例的位置， 找到距离它最近的前缀的出现概率 """
 def findRecord(prefix_record, position):
     list_ = list(filter(lambda item: item.end_pos < position, prefix_record))
@@ -80,6 +96,43 @@ def PrefixSpan_for_Sequential_Pattern(alpha, Sess_after_alpha, Record_alpha, Pat
             Sess_after_beta = dict(filter(lambda item: item[0] > InstanceList[0][0], Sess_after_alpha.items()))
             # {key:Sess_after_alpha[key] for key in Sess_after_alpha.keys() if key > InstanceList[0][0]}
             PrefixSpan_for_Sequential_Pattern(beta, Sess_after_beta, Record_beta, Pattern_Summary_Dict, min_len, max_len)
+
+def PrefixSpan_for_Sequential_Pattern_muti(alpha, Sess_after_alpha, Record_alpha, Pattern_Summary_Dict, min_len, max_len):
+    # next_categories = findCategory(alpha, Sess_after_alpha)
+    next_categories = set(AOI_name_list)
+    for cate in next_categories:
+        ''' beta is the new pattern '''
+        beta = alpha.copy(); beta.append(str(cate)); beta_len = len(beta)
+        ''' get instance action of cate '''
+        InstanceList = findInstanceList_muti(cate, Sess_after_alpha)
+        ''' S_beta is the suffix set; R_beta is the ; Supp_beta is the ; '''
+        Sess_after_beta, Supp_beta, Record_beta = {}, {}, []
+
+        """ 支持度计算方法 *** 闪亮登场 *** """
+        '''P is the occurrence probability in each session, p_j2 recaod the last probability'''
+        P, p_j2 = 0, 0
+        '''InstanceList is a event set. j[0] = key, j[1]=prob '''
+        for [key, prob] in InstanceList:
+            '''if beta is the first topic p_star = 1, else p_star = findRecord '''
+            p_star = 1.0 if beta_len - 1 <= 0 else findRecord(Record_alpha, key)
+            P = prob * p_star + (1 - prob) * p_j2
+            p_j2 = P
+            if P > 0.0:
+                Record_beta.append(Prefix_Item(prefix_name=beta, prob=P, end_pos=key))
+        """ 支持度计算方法 *** 完美谢幕 *** """
+
+        ''' filter out patterns with support equal to 0 '''
+        if  beta_len >= min_len and beta_len <= max_len and P > 0.0:
+            support = math.pow(P, 1 / beta_len)     # """ 针对序列模式长度进行归一化的支持度 """
+            pattern_str = "; ".join(beta)
+            Pattern_Summary_Dict[pattern_str] = Classical_Sequential_Pattern(pattern_name=tuple(beta), length=beta_len, support=support)
+            #print("Classical_Sequential_Pattern", tuple(beta), beta_len, support)
+
+        """ 基于模式增长思想的递归算法 """
+        if P > 0.0 and beta_len < max_len and InstanceList[0][0] + 1 < len(Sess_after_alpha):
+            Sess_after_beta = dict(filter(lambda item: item[0]>InstanceList[0][0], Sess_after_alpha.items()))
+            # {key:Sess_after_alpha[key] for key in Sess_after_alpha.keys() if key > InstanceList[0][0]}
+            PrefixSpan_for_Sequential_Pattern_muti(beta, Sess_after_beta, Record_beta, Pattern_Summary_Dict, min_len, max_len)
 
 
 def PrefixSpan_for_Sequential_Pattern_new(alpha, Sess_after_alpha, Record_alpha, Pattern_Summary_Dict, length):

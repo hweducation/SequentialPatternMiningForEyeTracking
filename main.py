@@ -4,7 +4,7 @@ import os, json, yaml
 from baseFunction import loadEyeTrackerDataNew, loadEyeTrackerData, outputProbData, outputPatternToXlwt_mutiSheet, outputRankToXlwt, outputAllinTopNToXlwt, crateXlsxFile_mutiSheet
 from baseFunction import crateGazeProbData, crateGazeTrackProbData, crateGazeTrackProbData_new
 
-from miningFuntion import PrefixSpan_for_Sequential_Pattern, PrefixSpan_for_Sequential_Pattern_new, Classical_Sequential_Pattern, getTotalSupp
+from miningFuntion import PrefixSpan_for_Sequential_Pattern_muti, PrefixSpan_for_Sequential_Pattern, PrefixSpan_for_Sequential_Pattern_new, Classical_Sequential_Pattern, getTotalSupp
 
 INF_rank = 1000000
 
@@ -59,7 +59,8 @@ if __name__ == "__main__":
                 """ 挖掘算法 """
                 Pattern_Summary_Dict_point[user_name], Pattern_Summary_Dict_track[user_name], Pattern_Summary_Dict_track_new[user_name] = {}, {}, {}
 
-                PrefixSpan_for_Sequential_Pattern([], gaze_prob_data, [], Pattern_Summary_Dict_point[user_name], 2, 5)
+                # PrefixSpan_for_Sequential_Pattern([], gaze_prob_data, [], Pattern_Summary_Dict_point[user_name], 2, 5)
+                PrefixSpan_for_Sequential_Pattern_muti([], gaze_prob_data, [], Pattern_Summary_Dict_point[user_name], 2, 5)
                 #PrefixSpan_for_Sequential_Pattern([], gazetrack_prob_data, [], Pattern_Summary_Dict_track[user_name], 2, 3)
                 '''
                 for i in range(2, 6):

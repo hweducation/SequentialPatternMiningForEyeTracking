@@ -30,8 +30,9 @@ def loadEyeTrackerDataNew(file_path):
                 AOI_p = []
                 index = 0
                 while index != component_size:
-                    temp_tuple =(AOI_name_list[index], split[index])
-                    AOI_p.append(temp_tuple)
+                    if float(split[index]) != 0:
+                        temp_tuple = (AOI_name_list[index], split[index])
+                        AOI_p.append(temp_tuple)
                     index += 1
                 eyeTrack_dict[i] = AOI_p
 
