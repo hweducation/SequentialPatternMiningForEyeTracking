@@ -1,7 +1,7 @@
 import os
 import xlwt
 import openpyxl
-component_size = 6
+component_size = 7
 AOI_name_list = ["diagram", "optionA", "optionB", "optionC", "optionD", "statement", "time"]
 """ 读取原始数据： eyeTrack_dict以字典的格式储存， eyeTrack_dict[顺序编号] = list([可视化区域, 持续时间]) """
 def loadEyeTrackerData(file_path):
@@ -31,7 +31,7 @@ def loadEyeTrackerDataNew(file_path):
                 index = 0
                 while index != component_size:
                     if float(split[index]) != 0:
-                        temp_tuple = (AOI_name_list[index], split[index])
+                        temp_tuple = (AOI_name_list[index], float(split[index]) )
                         AOI_p.append(temp_tuple)
                     index += 1
                 eyeTrack_dict[i] = AOI_p
