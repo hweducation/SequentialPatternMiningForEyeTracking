@@ -99,7 +99,7 @@ def PrefixSpan_for_Sequential_Pattern(alpha, Sess_after_alpha, Record_alpha, Pat
 
 def PrefixSpan_for_Sequential_Pattern_muti(alpha, Sess_after_alpha, Record_alpha, Pattern_Summary_Dict, min_len, max_len):
     # next_categories = findCategory(alpha, Sess_after_alpha)
-    next_categories = set(AOI_name_list)
+    next_categories = set(AOI_name_list) - set(alpha)
     for cate in next_categories:
         ''' beta is the new pattern '''
         beta = alpha.copy(); beta.append(str(cate)); beta_len = len(beta)
